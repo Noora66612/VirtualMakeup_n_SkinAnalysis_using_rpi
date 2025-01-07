@@ -15,13 +15,13 @@ In this tutorial, we will guide you through building a Virtual Makeup Applicatio
 ---
 
 ## Screenshots
+- ![](images/screenshot6.png)
+- ![](images/screenshot8.png)
 - ![](images/screenshot1.png)
 - ![](images/screenshot2.png)
 - ![](images/screenshot3.png)
 - ![](images/screenshot4.png)
 - ![](images/screenshot5.png)
-- ![](images/screenshot6.png)
-- ![](images/screenshot8.png)
 
 ## Materials and Tools
 ### Hardware:
