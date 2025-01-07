@@ -23,6 +23,10 @@ In this tutorial, we will guide you through building a Virtual Makeup Applicatio
 - ![](images/screenshot4.png)
 - ![](images/screenshot5.png)
 
+## Features
+- ***Real-Time Virtual Makeup Application***:
+The application allows users to try on makeup virtually in real-time using their webcam or uploaded image. The project applies makeup effects such as lip color, eyeshadow, eyeliner, and eyebrow styling to the user's face based on facial landmarks detected via the webcam or image.
+
 ## Materials and Tools
 ### Hardware:
 - Raspberry Pi (preferably 4B or later).
