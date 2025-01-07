@@ -1,13 +1,5 @@
 # Virtual Makeup Website with Skin Analysis
 
-> Version: 1.0.0
->
-> Date: 2025-01-03
->
-> Video: 
->
-> :warning: Do not forget to turn on the **close caption (CC)**.
-
 ## Introduction
 In this tutorial, we will guide you through building a Virtual Makeup Application using Python for backend processing. This application allows users to virtually apply makeup and analyze their skin in real-time using their device cameras. By following this step-by-step guide, you will learn to implement and run the project on a Raspberry Pi.
 
@@ -21,6 +13,9 @@ In this tutorial, we will guide you through building a Virtual Makeup Applicatio
   - Software: Python, OpenCV, Mediapipe, Numpy, Skinmage, Flask, Ngrok.
 
 ---
+
+## Screenshots
+- ![]
 
 ## Materials and Tools
 ### Hardware:
