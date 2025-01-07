@@ -35,11 +35,10 @@ In this tutorial, we will guide you through building a Virtual Makeup Applicatio
 - ***Face Validation***:
 - The system validates if a face is properly detected, checking for conditions like face size, position, and aspect ratio. If the face is not in a valid position or is too small, users will receive feedback and a debug image for troubleshooting.
 - ***Skin Analysis***:
-- The system performs analysis of the user's skin to assess:
-- **Dark Circles**: Using color analysis in the LAB color space to measure the darkness under the eyes.
-- **Wrinkles**: Using multi-scale edge detection techniques to identify wrinkles in the forehead and around the eyes.
-- **Skin Tone Uniformity**: Analyzing color variations on the cheeks and forehead to determine the uniformity of the skin tone.
-- 
+  - The system performs analysis of the user's skin to assess:
+    - **Dark Circles**: Using color analysis in the LAB color space to measure the darkness under the eyes.
+    - **Wrinkles**: Using multi-scale edge detection techniques to identify wrinkles in the forehead and around the eyes.
+    - **Skin Tone Uniformity**: Analyzing color variations on the cheeks and forehead to determine the uniformity of the skin tone. 
 
 ## Materials and Tools
 ### Hardware:
