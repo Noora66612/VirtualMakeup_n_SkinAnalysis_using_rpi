@@ -99,8 +99,8 @@ In this tutorial, we will guide you through building a Virtual Makeup Website us
    git clone https://github.com/Noora66612/VirtualMakeup_n_SkinAnalysis_using_rpi.git
    cd virtual-makeup-project
    ```
+### Setting Up Ngrok
 #### On your device:
-#### Setting Up Ngrok:
 1. Sigh up and install Ngrok from https://ngrok.com/.
 
    - use a MacBook as an example
@@ -112,34 +112,64 @@ In this tutorial, we will guide you through building a Virtual Makeup Website us
 
 ---
 
-## Showcasing Features and Functionality
+## Showcasing Important Features and Functionality
 #### Flask Backend Code (Python):
+- **Import Statements and Setup**
 ```python
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, Response, request, jsonify
 import cv2
 import numpy as np
-from utils import read_landmarks, add_mask
-
-app = Flask(__name__)
-
-@app.route('/process', methods=['POST'])
-def process_video():
-    file = request.files['video']
-    frame = cv2.imdecode(np.frombuffer(file.read(), np.uint8), cv2.IMREAD_COLOR)
-
-    # Virtual makeup logic using utils.py
-    landmarks = read_landmarks(frame)
-    # Additional processing logic here
-
-    return jsonify({"status": "processed", "result": "makeup_applied"})
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+from utils import *
+from threading import Lock
+import socket
+import logging
+import json
+import mediapipe as mp
+import base64
+from skimage.feature import local_binary_pattern
 ```
+- This sets up the necessary imports for Flask, OpenCV, and other libraries used for image processing and server setup.
 
+- Face Detection and Verification
+```python
+def verify_face_detection(frame, landmarks):
+    # Verifies the position and validity of detected face landmarks
+    ...
+```
+- This function checks if the detected face is within the valid bounds, ensuring a proper detection.
+
+- **Skin Analysis Functions**
+```python
+def analyze_dark_circles(frame, landmarks):
+    # Analyzes dark circles under the eyes using LAB color space
+    ...
+    
+def analyze_wrinkles(frame, landmarks):
+    # Analyzes wrinkles using multi-scale edge detection
+    ...
+    
+def analyze_skin_tone(frame, landmarks):
+    # Analyzes skin tone uniformity using LAB color space
+    ...
+```
+- These are the core analysis functions used to check different skin features, including dark circles, wrinkles, and skin tone uniformity.
+
+- **Flask Routes for Makeup Style and Skin Analysis**
+```python
+@app.route('/change_style', methods=['POST'])
+def change_style():
+    # Changes the makeup style based on user input
+    ...
+    
+@app.route('/analyze_skin', methods=['POST'])
+def analyze_skin():
+    # Handles skin analysis requests and returns results as JSON
+    ...
+```
+- These Flask routes manage the user requests for changing makeup style and performing skin analysis.
 ---
 
-### 3. Developing the Frontend
+###  Developing the Frontend
 #### HTML and JavaScript:
 ```html
 <!DOCTYPE html>
