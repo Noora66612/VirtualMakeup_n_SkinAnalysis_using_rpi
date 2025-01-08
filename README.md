@@ -16,12 +16,12 @@ In this tutorial, we will guide you through building a Virtual Makeup Website us
 
 ## Screenshots
 ![](sample/screenshot6.png)
-![](images/screenshot8.png)
-![](images/screenshot1.png)
-![](images/screenshot2.png)
-![](images/screenshot3.png)
-![](images/screenshot4.png)
-![](images/screenshot5.png)
+![](sample/screenshot8.png)
+![](sample/screenshot1.png)
+![](sample/screenshot2.png)
+![](sample/screenshot3.png)
+![](sample/screenshot4.png)
+![](sample/screenshot5.png)
 
 ## Features
 - ***Real-Time Virtual Makeup Application***:
