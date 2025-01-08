@@ -186,13 +186,29 @@ if __name__ == '__main__':
 
 ---
 
+## Areas for Improvement and Suggestions
+- ***Video Latency***
+  - Issue:
+  
+  The application exhibits noticeable video latency during real-time processing, particularly on low-performance devices such as the Raspberry Pi.
+  - Suggestions for Improvement:
+
+Optimize Video Processing: Utilize techniques like hardware acceleration (e.g., leveraging WebGL or GPU processing) to reduce the computational load.
+Adjust Resolution: Allow users to select lower video resolutions to decrease processing time.
+Asynchronous Processing: Introduce asynchronous or multithreaded processing to improve the responsiveness of the application.
+
+- ***Unrealistic Skin Analysis Scores***
+  - Issue:
+
+  The skin analysis scores provided by the application sometimes do not align with real-world conditions, leading to user dissatisfaction.
+
+---
+
 ## Conclusion
 By following this tutorial, you should have a working Virtual Makeup Application running on a Raspberry Pi. Feel free to enhance the project by adding more features like facial recognition or more detailed skin analysis.
 
 ---
 
-## Repository Link
-[GitHub Repository](<repository_url>)
+## References
 
-Ensure to clone the repository for the complete source code and additional assets.
 
