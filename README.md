@@ -93,7 +93,7 @@ In this tutorial, we will guide you through building a Virtual Makeup Website us
    ```
 4. Install required libraries:
    ```bash
-   pip3 install opencv-python flask mediapipe numpy skinmage
+   pip3 install opencv-python flask mediapipe numpy scikit-image
    ```
 5. Clone the project repository:
    ```bash
