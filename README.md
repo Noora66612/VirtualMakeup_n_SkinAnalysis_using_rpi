@@ -25,6 +25,7 @@ In this tutorial, we will guide you through building a Virtual Makeup Website us
 
 ## Features
 - ***Real-Time Virtual Makeup Application***:
+
   The application allows users to try on makeup virtually in real-time using their build-in camera. The project applies makeup effects such as lip color, eyeshadow, eyeliner, and eyebrow styling to the user's face based on facial landmarks detected via the camera.
 - ***Cross-Platform Access***:
 - By using ngrok to expose the application, users can access the project from any device with an internet connection, even if they are not on the same network or domain. This feature ensures remote access to the application for testing or usage purposes.
