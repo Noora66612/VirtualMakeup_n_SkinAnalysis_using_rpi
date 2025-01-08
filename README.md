@@ -15,13 +15,13 @@ In this tutorial, we will guide you through building a Virtual Makeup Website us
 ---
 
 ## Screenshots
-- ![](images/screenshot6.png)
-- ![](images/screenshot8.png)
-- ![](images/screenshot1.png)
-- ![](images/screenshot2.png)
-- ![](images/screenshot3.png)
-- ![](images/screenshot4.png)
-- ![](images/screenshot5.png)
+![](sample/screenshot6.png)
+![](images/screenshot8.png)
+![](images/screenshot1.png)
+![](images/screenshot2.png)
+![](images/screenshot3.png)
+![](images/screenshot4.png)
+![](images/screenshot5.png)
 
 ## Features
 - ***Real-Time Virtual Makeup Application***:
@@ -188,19 +188,13 @@ if __name__ == '__main__':
 
 ## Areas for Improvement and Suggestions
 - ***Video Latency***
-  - Issue:
-  
-  The application exhibits noticeable video latency during real-time processing, particularly on low-performance devices such as the Raspberry Pi.
-  - Suggestions for Improvement:
-
-Optimize Video Processing: Utilize techniques like hardware acceleration (e.g., leveraging WebGL or GPU processing) to reduce the computational load.
+  - Issue: The application exhibits noticeable video latency during real-time processing, particularly on low-performance devices such as the Raspberry Pi.
+  - Suggestions for Improvement: Optimize Video Processing: Utilize techniques like hardware acceleration (e.g., leveraging WebGL or GPU processing) to reduce the computational load.
 Adjust Resolution: Allow users to select lower video resolutions to decrease processing time.
 Asynchronous Processing: Introduce asynchronous or multithreaded processing to improve the responsiveness of the application.
 
 - ***Unrealistic Skin Analysis Scores***
-  - Issue:
-
-  The skin analysis scores provided by the application sometimes do not align with real-world conditions, leading to user dissatisfaction.
+  - Issue: The skin analysis scores provided by the application sometimes do not align with real-world conditions, leading to user dissatisfaction.
 
 ---
 
