@@ -101,15 +101,11 @@ In this tutorial, we will guide you through building a Virtual Makeup Website us
    cd virtual-makeup-project
    ```
 
-#### On the MacBook (or any laptop):
-1. Install Python and pip if not already installed.
-2. Install dependencies as outlined above.
-
 #### Setting Up Ngrok:
-1. Download and install Ngrok from https://ngrok.com/.
+1. Sigh up and install Ngrok from https://ngrok.com/.
 2. Start Ngrok to expose the Flask server:
    ```bash
-   ngrok http 5000
+   ngrok http http://localhost:5000
    ```
 
 ---
