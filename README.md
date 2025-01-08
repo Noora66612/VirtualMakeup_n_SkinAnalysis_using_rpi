@@ -89,7 +89,7 @@ In this tutorial, we will guide you through building a Virtual Makeup Website us
    ```
 3. Install Python and pip:
    ```bash
-   sudo apt install python3 python3-pip
+   sudo apt install python3.7 python3-pip
    ```
 4. Install required libraries:
    ```bash
