@@ -197,12 +197,17 @@ Adjust Resolution: Allow users to select lower video resolutions to decrease pro
 Asynchronous Processing: Introduce asynchronous or multithreaded processing to improve the responsiveness of the application.
 
 - ***Unrealistic Skin Analysis Scores***
-  - **Issue**: The skin analysis scores provided by the application sometimes do not align with real-world conditions, leading to user dissatisfaction.
+  - **Issue**:
+    
+    The skin analysis scores provided by the application sometimes do not align with real-world conditions, leading to user dissatisfaction.
   - **Suggestions for Improvement**:
     - Enhance Model Training: Use a larger, more diverse dataset to train the machine learning models for skin analysis.
     - Validation Mechanisms: Incorporate additional checks or calibrations to improve the accuracy of the scores.
     - User Feedback Integration: Allow users to rate the accuracy of the analysis, which can be used to refine the system over time.
 
+- ***Sensitivity to Lighting Conditions***
+  - **Issue**:
+   The accuracy of the skin analysis is significantly affected by variations in lighting conditions, which impacts the reliability of the results.
 ---
 
 ## Conclusion
