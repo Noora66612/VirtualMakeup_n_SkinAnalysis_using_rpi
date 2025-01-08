@@ -180,6 +180,9 @@ if __name__ == '__main__':
 - Paste the URL into the browser on your device and ensure the camera streams correctly.
 ---
 
+## Demo Video
+- https://youtu.be/5BYBEP4fRqY
+- :warning: The file name shown in the video is app3.py, but it has been corrected to app.py. Please use app.py in your setup.
 
 ---
 
