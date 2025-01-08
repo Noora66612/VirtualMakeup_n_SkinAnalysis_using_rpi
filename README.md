@@ -49,18 +49,16 @@ In this tutorial, we will guide you through building a Virtual Makeup Website us
 ## Materials and Tools
 ### Hardware:
 - Raspberry Pi (preferably 4B or later).
-- Camera module or USB webcam.
-- Power supply and HDMI monitor.
-- Laptop (MacBook used for development).
+- Any device equipped with a camera and capable of connecting to the internet
 
 ### Software:
-- Python (version 3.7 or later).
-- OpenCV.
-- Flask (for backend).
-- Mediapipe.
-- Numpy.
-- Skinmage.
-- Ngrok (for public access).
+- Python 3.7
+- OpenCV
+- Flask (for backend)
+- Mediapipe
+- Numpy
+- Skinmage
+- Ngrok (for public access)
 
 ---
 
