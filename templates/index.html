@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Virtual Makeup & Skin Analysis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .video-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        #video, #output {
+            width: 100%;
+            max-width: 640px;
+            border-radius: 8px;
+            background: #000;
+            transform: scaleX(-1);
+            -webkit-transform: scaleX(-1);
+        }
+        #canvas {
+            display: none;
+        }
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .style-controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .style-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .style-button.active {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        #naturalButton { background: #90EE90; color: white; }
+        #dramaticButton { background: #FF69B4; color: white; }
+        #sweetButton { background: #FFB6C1; color: white; }
+        #partyButton { background: #9370DB; color: white; }
+
+        .mode-switch {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .mode-button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #f0f0f0;
+            transition: all 0.3s ease;
+        }
+        
+        .mode-button.active {
+            background: #4A90E2;
+            color: white;
+        }
+
+        .analysis-button {
+            background: #4A90E2;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .analysis-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+        }
+        
+        .analysis-button:disabled {
+            opacity: 0.7;
+            transform: none;
+            cursor: not-allowed;
+        }
+        
+        .analysis-results {
+            display: none;
+            margin: 20px auto;
+            max-width: 600px;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+        
+        .score-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .score-label {
+            font-weight: bold;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        .score-value {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .score-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4A90E2;
+            min-width: 80px;
+            text-align: right;
+        }
+        
+        .score-severity {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .severity-Excellent { background: #34C759; color: white; }
+        .severity-Good { background: #4A90E2; color: white; }
+        .severity-Fair { background: #FFC107; color: black; }
+        .severity-Needs-Improvement { background: #FF3B30; color: white; }
+        
+        .overall-score {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            color: #4A90E2;
+        }
+
+        .debug-image-container {
+            margin: 20px auto;
+            max-width: 600px;
+            display: none;
+        }
+
+        .debug-image {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .error-message {
+            background: #FFE5E5;
+            color: #FF3B30;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .flip-button {
+            background: #007AFF;
+            color: white;
+        }
+        
+        button {
+            padding: 12px 24px;
+            margin: 8px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        #startButton { background: #34C759; color: white; }
+        #stopButton { background: #FF3B30; color: white; }
+        
+        #status {
+            margin: 10px;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .error { background: #FFE5E5; color: #FF3B30; }
+        .success { background: #E5FFE5; color: #34C759; }
+        
+        #debug {
+            margin-top: 20px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            text-align: left;
+            font-family: monospace;
+            white-space: pre-wrap;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .video-label {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .analyzing {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Virtual Makeup & Skin Analysis</h1>
+        
+        <div class="mode-switch">
+            <button id="makeupMode" class="mode-button active">Makeup</button>
+            <button id="analysisMode" class="mode-button">Skin Analysis</button>
+        </div>
+        
+        <div id="makeupControls" class="style-controls">
+            <button id="naturalButton" class="style-button active">Natural</button>
+            <button id="dramaticButton" class="style-button">Dramatic</button>
+            <button id="sweetButton" class="style-button">Sweet</button>
+            <button id="partyButton" class="style-button">Party</button>
+        </div>
+        
+        <div id="analysisControls" class="style-controls" style="display: none;">
+            <button id="analyzeButton" class="analysis-button">Analyze Skin</button>
+        </div>
+
+        <div class="video-container">
+            <div>
+                <div class="video-label">Original</div>
+                <video id="video" autoplay playsinline muted></video>
+            </div>
+            <div >
+                <div class="video-label">Processed</div>
+                <img id="output">
+            </div>
+        </div>
+
+        <div id="debugImageContainer" class="debug-image-container">
+            <img id="debugImage" class="debug-image">
+        </div>
+
+        <div id="analysisResults" class="analysis-results">
+            <div class="overall-score">
+                Overall Score: <span id="overallScore">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">Dark Circles</span>
+                <div class="score-value">
+                    <span id="darkCirclesScore" class="score-number">0</span>
+                    <span id="darkCirclesSeverity" class="score-severity">-</span>
+                </div>
+            </div>
+            <div class="score-item">
+                <span class="score-label">Wrinkles</span>
+                <div class="score-value">
+                    <span id="wrinklesScore" class="score-number">0</span>
+                    <span id="wrinklesSeverity" class="score-severity">-</span>
+                </div>
+            </div>
+            <div class="score-item">
+                <span class="score-label">Skin Tone Uniformity</span>
+                <div class="score-value">
+                    <span id="skinToneScore" class="score-number">0</span>
+                    <span id="skinToneSeverity" class="score-severity">-</span>
+                </div>
+            </div>
+        </div>
+        
+        <canvas id="canvas"></canvas>
+        <div class="controls">
+            <button id="startButton">Start Camera</button>
+            <button id="stopButton" disabled>Stop Camera</button>
+            <button id="flipButton" class="flip-button">Flip Camera</button>
+        </div>
+        <div id="status"></div>
+        <div id="debug"></div>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const output = document.getElementById('output');
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+        const status = document.getElementById('status');
+        const debug = document.getElementById('debug');
+	
+        let stream = null;
+        let isProcessing = false;
+        let previousRequest = null;
+
+        // Mode switching
+        const makeupMode = document.getElementById('makeupMode');
+        const analysisMode = document.getElementById('analysisMode');
+        const makeupControls = document.getElementById('makeupControls');
+        const analysisControls = document.getElementById('analysisControls');
+        const analysisResults = document.getElementById('analysisResults');
+        const debugImageContainer = document.getElementById('debugImageContainer');
+        
+        makeupMode.addEventListener('click', () => {
+            makeupMode.classList.add('active');
+            analysisMode.classList.remove('active');
+            makeupControls.style.display = 'flex';
+            analysisControls.style.display = 'none';
+            analysisResults.style.display = 'none';
+            debugImageContainer.style.display = 'none';
+
+            startVideoProcessing();
+        });
+        
+        analysisMode.addEventListener('click', () => {
+            analysisMode.classList.add('active');
+            makeupMode.classList.remove('active');
+            makeupControls.style.display = 'none';
+            analysisControls.style.display = 'flex';
+
+            isProcessing = false;
+        });
+
+        // Makeup style buttons
+        const styleButtons = {
+            natural: document.getElementById('naturalButton'),
+            dramatic: document.getElementById('dramaticButton'),
+            sweet: document.getElementById('sweetButton'),
+            party: document.getElementById('partyButton')
+        };
+
+        let currentStyle = 'natural';
+
+        Object.entries(styleButtons).forEach(([style, button]) => {
+            button.addEventListener('click', async () => {
+                Object.values(styleButtons).forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                try {
+                    const response = await fetch('/change_style', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ style: style })
+                    });
+                    
+                    if (response.ok) {
+                        currentStyle = style;
+                        log(`Changed style to: ${style}`);
+                    } else {
+                        throw new Error('Failed to change style');
+                    }
+                } catch (error) {
+                    log(`Error changing style: ${error.message}`);
+                    showStatus(`Error changing style: ${error.message}`, true);
+                }
+            });
+        });
+
+        // Skin analysis
+        const analyzeButton = document.getElementById('analyzeButton');
+        analyzeButton.addEventListener('click', async () => {
+            try {
+                showStatus('Analyzing skin...');
+                analyzeButton.disabled = true;
+                analyzeButton.classList.add('analyzing');
+                
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                ctx.drawImage(video, 0, 0);
+                
+                const blob = await new Promise(resolve => {
+                    canvas.toBlob(resolve, 'image/jpeg', 0.8);
+                });
+
+                const formData = new FormData();
+                formData.append('frame', blob);
+
+                const response = await fetch('/analyze_skin', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const results = await response.json();
+                
+                if (results.error) {
+                    showAnalysisError(results.message, results.debug_image);
+                    showStatus(results.message, true);
+                } else {
+                    updateAnalysisResults(results);
+                    if (results.debug_image) {
+                        document.getElementById('debugImage').src = results.debug_image;
+                        document.getElementById('debugImageContainer').style.display = 'block';
+                    }
+                    showStatus('Analysis complete!', false);
+                    analysisResults.scrollIntoView({ behavior: 'smooth' });
+                }
+            } catch (error) {
+                 log(`Analysis error: ${error.message}`);
+                showStatus(`Analysis error: ${error.message}`, true);
+            } finally {
+                analyzeButton.disabled = false;
+                analyzeButton.classList.remove('analyzing');
+            }
+        });
+
+        function showAnalysisError(message, debugImage) {
+            const results = document.getElementById('analysisResults');
+            results.style.display = 'block';
+            results.innerHTML = `
+                <div class="error-message">
+                    <h3>Analysis Error</h3>
+                    <p>${message}</p>
+                    ${debugImage ? `<img src="${debugImage}" class="debug-image">` : ''}
+                    <p>Please try again with proper face positioning.</p>
+                </div>
+            `;
+        }
+
+        function updateAnalysisResults(results) {
+            document.getElementById('overallScore').textContent = `${results.overall_score} / 100`;
+            
+            const indicators = {
+                'darkCircles': {
+                    label: 'Dark Circles',
+                    score: results.dark_circles.score,
+                    severity: results.dark_circles.severity
+                },
+                'wrinkles': {
+                    label: 'Wrinkles',
+                    score: results.wrinkles.score,
+                    severity: results.wrinkles.severity
+                },
+                'skinTone': {
+                    label: 'Skin Tone Uniformity',
+                    score: results.skin_tone.score,
+                    severity: results.skin_tone.severity
+                }
+            };
+
+            Object.entries(indicators).forEach(([key, data]) => {
+                const scoreElement = document.getElementById(`${key}Score`);
+                const severityElement = document.getElementById(`${key}Severity`);
+                
+                scoreElement.textContent = `${data.score} / 100`;
+                severityElement.textContent = data.severity;
+                severityElement.className = `score-severity severity-${data.severity.replace(' ', '-')}`;
+            });
+            
+            analysisResults.style.display = 'block';
+        }
+
+        function log(message) {
+            const timestamp = new Date().toISOString();
+            if (!debug.textContent) debug.textContent = '';
+            debug.textContent += `${timestamp}: ${message}\n`;
+            debug.scrollTop = debug.scrollHeight;
+            console.log(message);
+        }
+
+        function showStatus(message, isError = false) {
+            status.textContent = message;
+            status.className = isError ? 'error' : 'success';
+            status.style.display = 'block';
+            log(`Status: ${message}`);
+        }
+
+        async function startCamera() {
+            try {
+                log('Starting camera...');
+                
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                    throw new Error('Camera API not supported');
+                }
+
+                stream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        facingMode: 'user',
+                        width: { ideal: 640 },
+                        height: { ideal: 480 },
+                        frameRate: { ideal: 30 }
+                    }
+                });
+                
+                video.srcObject = stream;
+                await video.play();
+                
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                
+                startVideoProcessing();
+                
+                showStatus('Camera started');
+                startButton.disabled = true;
+                stopButton.disabled = false;
+                
+            } catch (err) {
+                log(`Error: ${err.name} - ${err.message}`);
+                let errorMessage = 'Camera error: ';
+                
+                if (err.name === 'NotAllowedError') {
+                    errorMessage += 'Permission denied. Please check browser settings.';
+                } else if (err.name === 'NotFoundError') {
+                    errorMessage += 'No camera found';
+                } else if (err.name === 'NotReadableError') {
+                    errorMessage += 'Camera is in use by another application';
+                } else {
+                    errorMessage += err.message;
+                }
+                
+                showStatus(errorMessage, true);
+            }
+        }
+
+        async function processVideo() {
+            if (!isProcessing) return;
+
+            try {
+                if (previousRequest) {
+                    previousRequest.abort();
+                }
+
+                const controller = new AbortController();
+                previousRequest = controller;
+
+                ctx.drawImage(video, 0, 0);
+                const blob = await new Promise(resolve => {
+                    canvas.toBlob(resolve, 'image/jpeg', 0.6);
+                });
+
+                const formData = new FormData();
+                formData.append('frame', blob);
+
+                const response = await fetch('/process_frame', {
+                    method: 'POST',
+                    body: formData,
+                    signal: controller.signal,
+                    headers: {
+                        'Cache-Control': 'no-cache',
+                        'Pragma': 'no-cache'
+                    }
+                });
+
+                if (response.ok) {
+                    const imageBlob = await response.blob();
+                    const imageUrl = URL.createObjectURL(imageBlob);
+                    output.src = imageUrl;
+                    setTimeout(() => URL.revokeObjectURL(imageUrl), 100);
+                }
+            } catch (error) {
+                if (error.name !== 'AbortError') {
+                    log(`Processing error: ${error.message}`);
+                }
+            }
+
+            requestAnimationFrame(processVideo);
+        }
+
+        function startVideoProcessing() {
+            if (!isProcessing && makeupMode.classList.contains('active')) {
+                isProcessing = true;
+                processVideo();
+            }
+        }
+
+        function stopCamera() {
+            log('Stopping camera...');
+            isProcessing = false;
+            if (stream) {
+                stream.getTracks().forEach(track => {
+                    track.stop();
+                    log(`Stopped track: ${track.kind}`);
+                });
+                video.srcObject = null;
+                output.src = '';
+                showStatus('Camera stopped');
+                startButton.disabled = false;
+                stopButton.disabled = true;
+            }
+        }
+
+        startButton.addEventListener('click', startCamera);
+        stopButton.addEventListener('click', stopCamera);
+
+        const flipButton = document.getElementById('flipButton');
+        let isFlipped = true;
+        
+        flipButton.addEventListener('click', () => {
+            isFlipped = !isFlipped;
+            video.style.transform = isFlipped ? 'scaleX(-1)' : 'scaleX(1)';
+            output.style.transform = isFlipped ? 'scaleX(-1)' : 'scaleX(1)';
+            flipButton.textContent = isFlipped ? 'Flip Normal' : 'Flip Mirror';
+        });
+
+        window.addEventListener('beforeunload', stopCamera);
+
+        (async function init() {
+            log('Initializing...');
+            try {
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                    throw new Error('Camera API not supported');
+                }
+                
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                const cameras = devices.filter(device => device.kind === 'videoinput');
+                log(`Found ${cameras.length} camera(s)`);
+                cameras.forEach((camera, index) => {
+                    log(`Camera ${index + 1}: ${camera.label || 'unnamed'}`);
+                });
+                
+            } catch (err) {
+                log(`Initialization error: ${err.message}`);
+                showStatus('Camera API not supported in this browser', true);
+                startButton.disabled = true;
+            }
+        })();
+    </script>
+</body>
+</html>
