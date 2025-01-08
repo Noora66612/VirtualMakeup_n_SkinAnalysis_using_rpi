@@ -25,17 +25,23 @@ In this tutorial, we will guide you through building a Virtual Makeup Website us
 
 ## Features
 - ***Real-Time Virtual Makeup Application***:
+
   The application allows users to try on makeup virtually in real-time using their build-in camera. The project applies makeup effects such as lip color, eyeshadow, eyeliner, and eyebrow styling to the user's face based on facial landmarks detected via the camera.
 - ***Cross-Platform Access***:
-- By using ngrok to expose the application, users can access the project from any device with an internet connection, even if they are not on the same network or domain. This feature ensures remote access to the application for testing or usage purposes.
+
+  By using ngrok to expose the application, users can access the project from any device with an internet connection, even if they are not on the same network or domain. This feature ensures remote access to the application for testing or usage purposes.
 - ***Customizable Makeup Styles***:
-- Users can choose from different makeup styles, including Natural, Dramatic, Sweet, and Party. Each style is defined by a set of colors and opacity levels for various face elements (lips, eyes, eyebrows, etc.).
+
+  Users can choose from different makeup styles, including Natural, Dramatic, Sweet, and Party. Each style is defined by a set of colors and opacity levels for various face elements (lips, eyes, eyebrows, etc.).
 - ***Facial Landmark Detection***:
-- Using MediaPipe Face Mesh, the application detects key facial landmarks (e.g., eyes, lips, cheeks) to accurately apply makeup to specific regions. The system uses a high-precision face mesh model to ensure that the makeup is aligned with the user's facial features.
+
+  Using MediaPipe Face Mesh, the application detects key facial landmarks (e.g., eyes, lips, cheeks) to accurately apply makeup to specific regions. The system uses a high-precision face mesh model to ensure that the makeup is aligned with the user's facial features.
 - ***Face Validation***:
-- The system validates if a face is properly detected, checking for conditions like face size, position, and aspect ratio. If the face is not in a valid position or is too small, users will receive feedback and a debug image for troubleshooting.
+
+  The system validates if a face is properly detected, checking for conditions like face size, position, and aspect ratio. If the face is not in a valid position or is too small, users will receive feedback and a debug image for troubleshooting.
 - ***Skin Analysis***:
-- The system performs analysis of the user's skin to assess:
+
+  The system performs analysis of the user's skin to assess:
   - **Dark Circles**: Using color analysis in the LAB color space to measure the darkness under the eyes.
   - **Wrinkles**: Using multi-scale edge detection techniques to identify wrinkles in the forehead and around the eyes.
   - **Skin Tone Uniformity**: Analyzing color variations on the cheeks and forehead to determine the uniformity of the skin tone. 
