@@ -97,7 +97,7 @@ In this tutorial, we will guide you through building a Virtual Makeup Website us
    ```
 5. Clone the project repository:
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/Noora66612/VirtualMakeup_n_SkinAnalysis_using_rpi.git
    cd virtual-makeup-project
    ```
 
