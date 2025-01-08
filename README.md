@@ -103,9 +103,10 @@ In this tutorial, we will guide you through building a Virtual Makeup Website us
 
 #### Setting Up Ngrok:
 1. Sigh up and install Ngrok from https://ngrok.com/.
+
    use a MacBook as an example
    - ![](images/ngrok_installation.png)
-2. Start Ngrok to expose the Flask server:
+3. Start Ngrok to expose the Flask server:
    ```bash
    ngrok http http://localhost:5000
    ```
