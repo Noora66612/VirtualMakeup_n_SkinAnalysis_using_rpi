@@ -188,8 +188,10 @@ if __name__ == '__main__':
 ## Areas for Improvement and Suggestions
 - ***Video Latency***
   - **Issue**:
+
     The application exhibits noticeable video latency during real-time processing, particularly on low-performance devices such as the Raspberry Pi.
   - **Suggestions for Improvement**:
+
     Optimize Video Processing: Utilize techniques like hardware acceleration (e.g., leveraging WebGL or GPU processing) to reduce the computational load.
 Adjust Resolution: Allow users to select lower video resolutions to decrease processing time.
 Asynchronous Processing: Introduce asynchronous or multithreaded processing to improve the responsiveness of the application.
@@ -197,9 +199,9 @@ Asynchronous Processing: Introduce asynchronous or multithreaded processing to i
 - ***Unrealistic Skin Analysis Scores***
   - **Issue**: The skin analysis scores provided by the application sometimes do not align with real-world conditions, leading to user dissatisfaction.
   - **Suggestions for Improvement**:
-  - Enhance Model Training: Use a larger, more diverse dataset to train the machine learning models for skin analysis.
-Validation Mechanisms: Incorporate additional checks or calibrations to improve the accuracy of the scores.
-User Feedback Integration: Allow users to rate the accuracy of the analysis, which can be used to refine the system over time.
+    - Enhance Model Training: Use a larger, more diverse dataset to train the machine learning models for skin analysis.
+    - Validation Mechanisms: Incorporate additional checks or calibrations to improve the accuracy of the scores.
+    - User Feedback Integration: Allow users to rate the accuracy of the analysis, which can be used to refine the system over time.
 
 ---
 
