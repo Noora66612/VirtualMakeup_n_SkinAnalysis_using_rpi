@@ -63,22 +63,23 @@ In this tutorial, we will guide you through building a Virtual Makeup Website us
 ## System Architecture
 ### Diagram
 ```
-+----------------+        +----------------+
-| User's Camera  | ---->  | Frontend       |
-+----------------+        +----------------+
-        |                          |
-        v                          v
-+----------------+        +----------------+
-| Backend Server | <----> | OpenCV + Mediapipe |
-| (Python Flask) |        | Processing     |
-+----------------+        +----------------+
++----------------+        +----------------+           +----------------+
+| User's Camera  | ---->  |    Frontend    | --------> |     ngrok      |
++----------------+        +----------------+           +----------------+
+        |                          |                            |
+        v                          v                            v
++----------------+        +--------------------+    +----------------+
+| Backend Server | <----> | OpenCV + Mediapipe |    | Secure Tunnel  |
+| (Python Flask) |        | Processing         |    |                |
++----------------+        +--------------------+    +----------------+
+
 ```
 
 ---
 
 ## Step-by-Step Implementation
 
-### 1. Setting Up the Environment
+### Setting Up the Environment
 #### On the Raspberry Pi:
 1. Install the latest Raspbian OS.
 2. Update and upgrade the system:
@@ -98,7 +99,7 @@ In this tutorial, we will guide you through building a Virtual Makeup Website us
    git clone https://github.com/Noora66612/VirtualMakeup_n_SkinAnalysis_using_rpi.git
    cd virtual-makeup-project
    ```
-
+#### On your device:
 #### Setting Up Ngrok:
 1. Sigh up and install Ngrok from https://ngrok.com/.
 
@@ -111,7 +112,7 @@ In this tutorial, we will guide you through building a Virtual Makeup Website us
 
 ---
 
-### 2. Setting Up the Backend
+## Showcasing Features and Functionality
 #### Flask Backend Code (Python):
 ```python
 from flask import Flask, request, jsonify
@@ -192,9 +193,9 @@ if __name__ == '__main__':
     The application exhibits noticeable video latency during real-time processing, particularly on low-performance devices such as the Raspberry Pi.
   - **Suggestions for Improvement**:
 
-    Optimize Video Processing: Utilize techniques like hardware acceleration (e.g., leveraging WebGL or GPU processing) to reduce the computational load.
-Adjust Resolution: Allow users to select lower video resolutions to decrease processing time.
-Asynchronous Processing: Introduce asynchronous or multithreaded processing to improve the responsiveness of the application.
+    - Optimize Video Processing: Utilize techniques like hardware acceleration (e.g., leveraging WebGL or GPU processing) to reduce the computational load.
+    - Adjust Resolution: Allow users to select lower video resolutions to decrease processing time.
+    - Asynchronous Processing: Introduce asynchronous or multithreaded processing to improve the responsiveness of the application.
 
 - ***Unrealistic Skin Analysis Scores***
   - **Issue**:
@@ -207,14 +208,26 @@ Asynchronous Processing: Introduce asynchronous or multithreaded processing to i
 
 - ***Sensitivity to Lighting Conditions***
   - **Issue**:
-   The accuracy of the skin analysis is significantly affected by variations in lighting conditions, which impacts the reliability of the results.
+
+    The accuracy of the skin analysis is significantly affected by variations in lighting conditions, which impacts the reliability of the results.
+
+  - **Suggestions for Improvement**:
+ 
+    - Implement Lighting Normalization: Use computer vision techniques to normalize lighting effects in the captured images.
+    - Guide for Optimal Lighting: Provide users with guidance on maintaining consistent lighting (e.g., positioning near natural light sources or using neutral lighting).
+    - Dynamic Adjustments: Incorporate real-time adjustments to account for lighting variations using algorithms like histogram equalization.
+
 ---
 
 ## Conclusion
-By following this tutorial, you should have a working Virtual Makeup Application running on a Raspberry Pi. Feel free to enhance the project by adding more features like facial recognition or more detailed skin analysis.
+By following this tutorial, you should have a functional Virtual Makeup Application running on a Raspberry Pi. However, please note that this is just a basic implementation and not the final or perfect version. We kindly ask for your understanding as there may be areas that still need improvement.
 
 ---
 
 ## References
+- ngrok
+  - https://ngrok.com
+- virtual makeup using mediapipe on github
+  - https://github.com/Jayanths9/Virtual_Makeup
 
 
