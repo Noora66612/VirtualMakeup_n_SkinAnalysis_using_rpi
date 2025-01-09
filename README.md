@@ -109,34 +109,44 @@ In this tutorial, we will guide you through building a Virtual Makeup Website us
    ```bash
    ngrok http http://localhost:5000
    ```
-
+   
 ---
 
-## Showcasing Important Features and Functionality
-#### Flask Backend Code (Python):
-- **Import Statements and Setup**
-```python
-from flask import Flask, render_template, Response, request, jsonify
-import cv2
-import numpy as np
-from utils import *
-from threading import Lock
-import socket
-import logging
-import json
-import mediapipe as mp
-import base64
-from skimage.feature import local_binary_pattern
-```
-- This sets up the necessary imports for Flask, OpenCV, and other libraries used for image processing and server setup.
+### Testing and Debugging
+- Run the backend server on the Raspberry Pi terminal:
+  ```bash
+  python3 app.py
+  ```
+- Use Ngrok to share the application (in another terminal window on the Raspberry Pi):
+  ```bash
+  ngrok http http://localhost:5000
+  ```
+  ![](sample/screenshot8.png)
+- Paste the URL into the browser on your device and ensure the camera streams correctly.
+  
+---
 
-- Face Detection and Verification
+### Personalization Options
+### Flask Backend Code (Python):
+- **Modify Facial Landmark Regions**
+  - The REGIONS dictionary defines facial regions based on landmark indices. You can adjust these regions by adding, removing, or redefining landmarks to better suit specific needs.
+```python
+# Adjusted Facial Landmark Regions
+REGIONS = {
+    'left_eye': [33, 133, 157, 158, 159, 160, 161, 173, 246, 7, 8],  # Added extra points
+    'right_eye': [362, 263, 249, 390, 373, 374, 380, 381, 382, 384],
+    'forehead': [67, 109, 10, 338, 297, 332],
+    'cheeks': [187, 411, 117, 346, 123, 147, 213, 192, 214],
+}
+```
+
+- **Face Detection and Verification**
 ```python
 def verify_face_detection(frame, landmarks):
     # Verifies the position and validity of detected face landmarks
     ...
 ```
-- This function checks if the detected face is within the valid bounds, ensuring a proper detection.
+This function checks if the detected face is within the valid bounds, ensuring a proper detection.
 
 - **Skin Analysis Functions**
 ```python
@@ -152,7 +162,7 @@ def analyze_skin_tone(frame, landmarks):
     # Analyzes skin tone uniformity using LAB color space
     ...
 ```
-- These are the core analysis functions used to check different skin features, including dark circles, wrinkles, and skin tone uniformity.
+These are the core analysis functions used to check different skin features, including dark circles, wrinkles, and skin tone uniformity.
 
 - **Flask Routes for Makeup Style and Skin Analysis**
 ```python
@@ -166,48 +176,37 @@ def analyze_skin():
     # Handles skin analysis requests and returns results as JSON
     ...
 ```
-- These Flask routes manage the user requests for changing makeup style and performing skin analysis.
+These Flask routes manage the user requests for changing makeup style and performing skin analysis.
 ---
 
 ###  Developing the Frontend
 #### HTML and JavaScript:
+- **Mode Switching (Makeup / Skin Analysis)**
 ```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Virtual Makeup App</title>
-</head>
-<body>
-    <h1>Virtual Makeup Application</h1>
-    <video id="video" autoplay></video>
-    <canvas id="output"></canvas>
+// Mode switching
+makeupMode.addEventListener('click', () => {
+    makeupMode.classList.add('active');
+    analysisMode.classList.remove('active');
+    makeupControls.style.display = 'flex';
+    analysisControls.style.display = 'none';
+    analysisResults.style.display = 'none';
+    debugImageContainer.style.display = 'none';
 
-    <script>
-        const video = document.getElementById('video');
-        navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
-            video.srcObject = stream;
-        });
+    startVideoProcessing();
+});
 
-        // Logic to capture frame and send to backend
-    </script>
-</body>
-</html>
+analysisMode.addEventListener('click', () => {
+    analysisMode.classList.add('active');
+    makeupMode.classList.remove('active');
+    makeupControls.style.display = 'none';
+    analysisControls.style.display = 'flex';
+
+    isProcessing = false;
+});
 ```
+This snippet handles the switching between the Makeup and Skin Analysis modes when the user clicks on the respective buttons.
 
----
-
-### 4. Testing and Debugging
-- Run the backend server on the Raspberry Pi terminal:
-  ```bash
-  python3 app.py
-  ```
-- Use Ngrok to share the application (in another terminal window on the Raspberry Pi):
-  ```bash
-  ngrok http http://localhost:5000
-  ```
-  ![](sample/screenshot8.png)
-- Paste the URL into the browser on your device and ensure the camera streams correctly.
+- **Makeup Style Selection (Natural, Dramatic, etc.)
 ---
 
 ## Demo Video
