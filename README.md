@@ -15,7 +15,6 @@ In this tutorial, we will guide you through building a Virtual Makeup Website us
 ---
 
 ## Screenshots
-![](sample/screenshot1.png)
 ![](sample/screenshot2.png)
 ![](sample/screenshot3.png)
 ![](sample/screenshot4.png)
