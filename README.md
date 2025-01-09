@@ -1,7 +1,7 @@
 # Virtual Makeup Website with Skin Analysis
 
 ## Introduction
-In this tutorial, we will guide you through building a Virtual Makeup Website using Python for backend processing. This application allows users to virtually apply makeup and analyze their skin in real-time using their device cameras. By following this step-by-step guide, you will learn to implement and run the project on a Raspberry Pi.
+This tutorial will guide you through building a Virtual Makeup Website using Python for backend processing. This application allows users to virtually apply makeup and analyze their skin in real-time using their device cameras. By following this step-by-step guide, you will learn to implement and run the project on a Raspberry Pi.
 
 ## Project Overview
 - **Objective**: To create a virtual makeup application that leverages real-time video processing and OpenCV for makeup application.
@@ -23,7 +23,7 @@ In this tutorial, we will guide you through building a Virtual Makeup Website us
 ## Features
 - ***Real-Time Virtual Makeup Application***:
 
-  The application allows users to try on makeup virtually in real-time using their build-in camera. The project applies makeup effects such as lip color, eyeshadow, eyeliner, and eyebrow styling to the user's face based on facial landmarks detected via the camera.
+  The application allows users to try on makeup virtually in real-time using the build-in camera on their devices. The project applies makeup effects such as lip color, eyeshadow, eyeliner, and eyebrow styling to the user's face based on facial landmarks detected via the camera.
 - ***Cross-Platform Access***:
 
   By using ngrok to expose the application, users can access the project from any device with an internet connection, even if they are not on the same network or domain. This feature ensures remote access to the application for testing or usage purposes.
