@@ -32,7 +32,7 @@ This tutorial will guide you through building a Virtual Makeup Website using Pyt
   Users can choose from different makeup styles, including Natural, Dramatic, Sweet, and Party. Each style is defined by a set of colors and opacity levels for various face elements (lips, eyes, eyebrows, etc.).
 - ***Facial Landmark Detection***:
 
-  Using MediaPipe Face Mesh, the application detects key facial landmarks (e.g., eyes, lips, cheeks) to accurately apply makeup to specific regions. The system uses a high-precision face mesh model to ensure that the makeup is aligned with the user's facial features.
+  Using MediaPipe Face Mesh, the application detects key facial landmarks (e.g. eyes, lips, cheeks) to accurately apply makeup to specific regions. The system uses a high-precision face mesh model to ensure that the makeup is aligned with the user's facial features.
 - ***Face Validation***:
 
   The system validates if a face is properly detected, checking for conditions like face size, position, and aspect ratio. If the face is not in a valid position or is too small, users will receive feedback and a debug image for troubleshooting.
@@ -80,20 +80,19 @@ This tutorial will guide you through building a Virtual Makeup Website using Pyt
 
 ### Setting Up the Environment
 #### On the Raspberry Pi:
-1. Install the latest Raspbian OS.
-2. Update and upgrade the system:
+1. Update and upgrade the system:
    ```bash
    sudo apt update && sudo apt upgrade
    ```
-3. Install Python and pip:
+2. Install Python and pip:
    ```bash
    sudo apt install python3.7 python3-pip
    ```
-4. Install required libraries:
+3. Install required libraries:
    ```bash
    pip3 install opencv-python flask mediapipe numpy scikit-image
    ```
-5. Clone the project repository:
+4. Clone the project repository:
    ```bash
    git clone https://github.com/Noora66612/VirtualMakeup_n_SkinAnalysis_using_rpi.git
    cd virtual-makeup-project
@@ -315,6 +314,7 @@ By following this tutorial, you should have a functional Virtual Makeup Applicat
 - Flask: https://flask.palletsprojects.com/
 - OpenCV: https://opencv.org/
 - Mediapipe: https://google.github.io/mediapipe/
+- numpy: https://numpy.org
 - Skinmage: https://github.com/Tobias-Fischer/skinmage
 - ngrok: https://ngrok.com/
 - Python 3.7: https://www.python.org/
