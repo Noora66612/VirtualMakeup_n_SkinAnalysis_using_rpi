@@ -323,11 +323,3 @@ By following this tutorial, you should have a functional Virtual Makeup Applicat
 
 - virtual makeup using mediapipe on github
   - https://github.com/Jayanths9/Virtual_Makeup
-
-- OpenAI ChatGPT: 
-ChatGPT was utilized during the development process for brainstorming ideas, writing documentation, and debugging assistance.
-  - https://chatgpt.com
-- Anthropic Claude: 
-Claude was used to refine the project's documentation and assist in technical problem-solving
-  - https://claude.ai
-
